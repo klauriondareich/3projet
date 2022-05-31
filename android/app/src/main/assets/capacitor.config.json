@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "iDrive-mobile",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}

@@ -1,0 +1,7 @@
+{
+  "name": "iDrive-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
