@@ -12,7 +12,7 @@
         <ion-label position="floating">Mot de passe</ion-label>
         <ion-input type="password"></ion-input>
       </ion-item>
-       <ion-button shape="round" expand="block" type="submit" id="login">Se connecter</ion-button>
+       <ion-button shape="round" expand="block" id="login" href="auth/home">Se connecter</ion-button>
        <ion-button id="register" href="/user/register">S'inscrire</ion-button>
     </ion-content>
   </ion-page>
@@ -46,7 +46,7 @@ export default defineComponent({
 }
 ion-button#login{
   margin: 50px 20px;
-  --background:#3dc2ff;
+  --background:#0052cc;
   --padding-top: 25px;
   --padding-bottom: 20px;
 }
