@@ -3,13 +3,28 @@ import { RouteRecordRaw } from 'vue-router';
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: '/auth/home',
+    component: () => import ('../views/Appbar.vue'),
+    children:[
+      {
+        path: '/auth/home',
+        component: () => import ('../views/Home.vue')
+      },
+      {
+        path: '/auth/account',
+        component: () => import ('../views/Account.vue')
+      },
+      {
+        path: '/auth/documents',
+        component: () => import ('../views/ListDocuments.vue')
+      }
+    ]
+  },
+  {
     path: '',
     redirect: '/user/login'
   },
-  {
-    path: '/auth/home',
-    component: () => import ('../views/Home.vue')
-  },
+  
   {
     path: '/user/login',
     component: () => import ('../views/Login.vue')
@@ -17,14 +32,6 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/user/register',
     component: () => import ('../views/Register.vue')
-  },
-  {
-    path: '/auth/account',
-    component: () => import ('../views/Account.vue')
-  },
-  {
-    path: '/auth/documents',
-    component: () => import ('../views/ListDocuments.vue')
   },
 ]
 
