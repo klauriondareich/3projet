@@ -2,13 +2,16 @@
   <ion-app>
      <ion-page>
         <ion-header collapse="fade">
-          <div id="header">
+          <div>
               <ion-title>IDrive Mobile</ion-title>
           </div>
-          <div id="subheader">
+          <!-- <div id="subheader">
             <ion-title>Hello Laurion!</ion-title>
-          </div>
+          </div> -->
         </ion-header>
+        <ion-content>
+          <p id="subheader">DDD</p>
+        </ion-content>
         <ion-tabs>
             <ion-tab-bar slot="bottom">
                <ion-tab-button tab="home" href="/auth/home">
@@ -99,10 +102,10 @@ export default defineComponent({
     background-color: #f7f7f7;
   }
   ion-tab-button ion-icon{
-    color: #3dc2ff;
+    color: #0052cc;
   }
   ion-label{
-    color: #111;
+    color: rgb(51, 49, 49);
     font-size: 13px;
     font-weight: bold;
   }
@@ -113,17 +116,15 @@ export default defineComponent({
     background-color: #F2F2F2;
   }
   ion-header{
-    background: #f7f7f7;
+    background: url('../../public/assets/bg.png');
     padding: 20px;
   }
   ion-title{
     font-size: 18px;
+    color: #fff;
   }
   div#header{
-    background: #3dc2ff!important;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center;
+    background: #0052cc!important;
   }
   div#subheader ion-title{
     text-align: left;
