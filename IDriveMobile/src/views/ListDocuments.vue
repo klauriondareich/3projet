@@ -14,7 +14,7 @@ import { defineComponent } from 'vue';
 import { IonPage } from '@ionic/vue';
 
 export default defineComponent({
-  name: 'FolderPage',
+  name: 'ListDocumentPage',
   components: {
     IonPage,
   }

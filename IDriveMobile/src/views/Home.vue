@@ -31,7 +31,7 @@ import { IonPage, IonIcon, IonFab } from '@ionic/vue';
 import { homeOutline, personOutline, addOutline, documentAttachOutline } from 'ionicons/icons';
 
 export default defineComponent({
-  name: 'FolderPage',
+  name: 'HomePage',
   components: {
     IonPage,
     IonIcon, 
