@@ -9,9 +9,6 @@
             <ion-title>Hello Laurion!</ion-title>
           </div> -->
         </ion-header>
-        <ion-content>
-          <p id="subheader">DDD</p>
-        </ion-content>
         <ion-tabs>
             <ion-tab-bar slot="bottom">
                <ion-tab-button tab="home" href="/auth/home">
@@ -56,6 +53,7 @@ export default defineComponent({
     IonRouterOutlet, 
   },
   setup() {
+
     const selectedIndex = ref(0);
     // const appPages = [
     //   {
