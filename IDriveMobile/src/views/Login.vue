@@ -13,7 +13,7 @@
         <ion-input type="password"></ion-input>
       </ion-item>
        <ion-button shape="round" expand="block" id="login" href="auth/home">Se connecter</ion-button>
-       <ion-button id="register" href="/user/register">S'inscrire</ion-button>
+       <ion-button id="register" type="submit" href="/user/register">S'inscrire</ion-button>
     </ion-content>
   </ion-page>
 </template>
@@ -33,6 +33,17 @@ export default defineComponent({
     IonLabel,
     IonInput, 
     IonItem
+  },
+
+  setup(){
+    
+    const loginUser = () => {
+      console.log("logget in")
+    };
+
+    return{
+      loginUser
+    }
   }
 });
 </script>
