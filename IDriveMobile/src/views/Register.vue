@@ -27,10 +27,10 @@
 </template>
 
 <script lang="ts">
-
+/* eslint-disable */
 import { defineComponent } from 'vue';
 import { IonPage, IonImg, IonContent, IonButton, IonLabel, IonInput, IonItem } from '@ionic/vue';
-import axios from 'axios'
+import axios from 'axios';
 
 export default defineComponent({
   name: 'RegisterPage',
@@ -67,7 +67,7 @@ export default defineComponent({
     }, {headers: {'Access-Control-Allow-Origin': '*'}})
     .then( (response) => {
       if (response.status == 200){
-        this.errorMessage = "Votre compte a été crée avec succès!";
+        this.successMessage = "Votre compte a été crée avec succès!";
         return;
       }
       this.errorMessage = response.data;
