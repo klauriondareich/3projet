@@ -1,15 +1,15 @@
 import { createNewUser, deleteUser, getUserById, getUsers, updateUser } from '../controllers/usersController.js';
 import { createNewRover, deleteRover, getRoverById, getRovers, updateRover } from '../controllers/roverController.js';
 import { createNewMission, deleteMission, getMissionById, getMissions, updateMission } from '../controllers/missionController.js';
-import {registerUser } from '../controllers/authController.js';
+import { loginUser, registerUser } from '../controllers/authController.js';
 import { authorization } from '../routes/checkToken.js';
 
 const routes = (app) => {
 
     // Login user
 
-    // app.route('/user/login')
-    // .post(loginUser);
+    app.route('/api/v1/login')
+    .post(loginUser);
 
     app.route('/api/v1/register')
     .post(registerUser);
