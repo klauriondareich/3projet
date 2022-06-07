@@ -1,8 +1,6 @@
-import { UsersSchema } from '../models/userModel.js';
 import Joi from "joi"
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import mysql from 'mysql';
 import initCon from '../../db.js';
 
 // const User = mysql.model('Users', UsersSchema);
@@ -42,10 +40,10 @@ export const registerUser = async (req, res) =>{
 
     //console.log("user response : ", req.body);
 
-    initCon.connect(function(err) {
+    initCon.connect(function() {
         // add func to Check if user already exist
         var sql = `INSERT INTO users (username, email, mdp, size_of_all_docs, blocked) VALUES ('${username}', '${email}', '${password}', '${doc_size}', '${blocked}')`;
-        initCon.query(sql, function (err, result) {
+        initCon.query(sql, function (err) {
           if (err) throw err;
           res.send("Registration validated")
         });
