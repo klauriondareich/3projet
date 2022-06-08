@@ -3,15 +3,6 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import initCon from '../../db.js';
 
-// const User = mysql.model('Users', UsersSchema);
-
-initCon.connect(function(err) {
-    if (err) {
-        return console.error('error: ' + err.message);
-      }
-  console.log("Connected!");
-});
-
 const schema = Joi.object({ 
 
     username: Joi.string().required(),
@@ -38,22 +29,33 @@ export const registerUser = async (req, res) =>{
     let doc_size = req.body.size_of_all_docs;
     let blocked = req.body.blocked;
 
-    //console.log("user response : ", req.body);
-
     initCon.connect(function() {
-        // add func to Check if user already exist
-        var sql = `INSERT INTO users (username, email, mdp, size_of_all_docs, blocked) VALUES ('${username}', '${email}', '${password}', '${doc_size}', '${blocked}')`;
-        initCon.query(sql, function (err) {
+
+      // Check if the user exist or not
+      let  sql_search_user = `SELECT * FROM users WHERE email="${email}"`;
+      initCon.query(sql_search_user, function (err, result) {
           if (err) throw err;
-          res.send("Registration validated")
+          console.log("result ", result);
+          
+          if (result.length == 0){
+            // Insert user infos in database
+            var sql = `INSERT INTO users (username, email, mdp, size_of_all_docs, blocked) VALUES ('${username}', '${email}', '${password}', '${doc_size}', '${blocked}')`;
+            initCon.query(sql, function (err) {
+              if (err) throw err;
+              return res.status(200).send("Votre compte a été crée avec succès!")
+            });
+          }
+          else return res.status(400).send("L'adresse email existe déjà")
+          
         });
-      });
+    });
+    
 };
 
 // Login user 
 export const loginUser = async (req, res) =>{
 
-    initCon.connect(function(err) {
+    initCon.connect(function() {
 
         var sql = `SELECT * FROM users WHERE email="${req.body.email}"`;
         initCon.query(sql, function (err, result) {
@@ -71,16 +73,4 @@ export const loginUser = async (req, res) =>{
           
         });
       });
- 
-    // const user = await User.findOne({email: req.body.email});
-    // if (!user) return res.status(400).send("Email is not found");
-
-    // const validPassword = await bcrypt.compare(req.body.password, user.password);
-    // if (!validPassword) return res.status(400).send("Invalid password");
-
-
-
-    // const myToken = jwt.sign({ _id: user._id}, "kld1SGSAHJLZHZZ");
-    // res.header('auth-token', myToken).send(myToken);
-
 };
