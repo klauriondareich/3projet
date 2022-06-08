@@ -66,8 +66,10 @@ export default defineComponent({
         blocked: false
     }, {headers: {'Access-Control-Allow-Origin': '*'}})
     .then( (response) => {
+      console.log(response)
       if (response.status == 200){
-        this.successMessage = "Votre compte a été crée avec succès!";
+        this.successMessage = response.data;
+        this.errorMessage = "";
         return;
       }
       this.errorMessage = response.data;
