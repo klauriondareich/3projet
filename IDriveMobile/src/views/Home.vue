@@ -2,11 +2,15 @@
   <ion-page>
     <ion-content>
        <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-          <ion-fab-button>
+          <ion-fab-button type="submit" ref="form" @click="toOpen()">
             <ion-icon :icon="addOutline"></ion-icon>
           </ion-fab-button>
+           <input type="file" name="file" @change="uploadFile($event)" >
+          <!-- <form method="post" enctype="multipart/form-data" action="http://localhost:3000/api/v1/upload">
+           
+            <input type="submit" id="submit">
+          </form> -->
          
-
         </ion-fab>
         <div id="container">
           <ion-list>
@@ -26,21 +30,77 @@
 
 <script lang="ts">
 
-import { defineComponent } from 'vue';
-import { IonPage, IonIcon, IonFab } from '@ionic/vue';
+import { defineComponent, ref } from 'vue';
+import { IonPage, IonIcon, IonFab, IonFabButton, IonContent, IonList, IonTitle, IonItem, IonLabel, IonButton, IonImg} from '@ionic/vue';
 import { homeOutline, personOutline, addOutline, documentAttachOutline } from 'ionicons/icons';
+import axios from 'axios';
 
 export default defineComponent({
   name: 'HomePage',
   components: {
     IonPage,
     IonIcon, 
-    IonFab
+    IonFab,
+    IonFabButton,
+    IonContent,
+    IonList,
+    IonTitle,
+    IonItem,
+    IonLabel,
+    IonButton,
+    IonImg
+  },
+  data(){
+    return{
+      file: ""
+    }
+  },
+  methods:{
+
+    toOpen(){
+      let input = document.getElementById("input-file");
+      input?.click();
+    },
+
+    uploadFile(event:any){
+
+      this.file = event.target.files[0];
+      let fileName = event.target.files[0].name;
+      let type =  event.target.files[0].type;
+      let lastModified = event.target.files[0].lastModified;
+      let lastModifiedDate = event.target.files[0].lastModifiedDate;
+      let size = event.target.files[0].size;
+
+      //Sending file in backend api
+      axios.post('http://localhost:3000/api/v1/upload', {
+          file: this.file,
+          fileName: fileName,
+          type: type,
+          size: size,
+          lastModifiedDate: lastModifiedDate,
+          lastModified: lastModified
+        }, {headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'multipart/form-data'
+        }})
+      .then( (response) => {
+        if (response.status == 200){
+          console.log("response", response)
+        }
+        // this.errorMessage = response.data;
+      })
+      .catch( (error) => {
+        if (error.response.status == 400){
+         console.log(error.response.data);
+        }});
+    }
+    
   },
    setup() {
+
      const folders = [
-       {title: "Dossier 1"},
-       {title: "Dossier 2"},
+       {title: "fichier 1"},
+       {title: "fichier 2"},
      ]
 
     const changeListener = ()=>{
@@ -86,5 +146,11 @@ export default defineComponent({
 }
 ion-fab-button{
   --background:#0052cc;
+}
+#input-file{
+  visibility: hidden;
+}
+#form-hide{
+  visibility: hidden;
 }
 </style>
