@@ -1,6 +1,7 @@
 <template>
   <ion-page>
     <ion-content>
+    
        <ion-fab vertical="bottom" horizontal="center" slot="fixed">
           <ion-fab-button type="submit" ref="form" @click="toOpen()">
             <ion-icon :icon="addOutline"></ion-icon>
@@ -9,7 +10,15 @@
          
         </ion-fab>
         <div id="container">
-          
+            <div>
+
+            </div>
+            <ion-card >
+                <ion-card-header>
+                  <ion-card-title>Espace de stockage : {{getSpaceUsed()}}% utilisé</ion-card-title>
+                </ion-card-header>
+                <ion-progress-bar color="primary" :value="getSpaceUsed()"></ion-progress-bar>
+            </ion-card>
           <ion-list>
             <ion-title id="title">Tous vos documents</ion-title>
             <ion-item v-for="item in allFiles" :key="item.id">
@@ -32,7 +41,8 @@
 <script lang="ts">
 
 import { defineComponent, ref } from 'vue';
-import { IonPage, IonIcon, IonFab, IonFabButton, IonContent, IonList, IonTitle, IonItem, IonLabel, IonButton, IonImg, IonThumbnail} from '@ionic/vue';
+import { IonPage, IonIcon, IonFab, IonFabButton, IonCardHeader,
+    IonCardTitle, IonCard,IonContent, IonList, IonTitle, IonItem, IonLabel, IonButton, IonImg, IonThumbnail} from '@ionic/vue';
 import { homeOutline, personOutline, addOutline, documentAttachOutline } from 'ionicons/icons';
 import axios from 'axios';'../.'
 
@@ -50,7 +60,10 @@ export default defineComponent({
     IonLabel,
     IonButton,
     IonImg,
-    IonThumbnail
+    IonThumbnail,
+    IonCardHeader,
+    IonCardTitle,
+    IonCard
   },
   data(){
     return {
@@ -69,6 +82,10 @@ export default defineComponent({
 
     getFileType(file:any){
       return file.split("/")[0];
+    },
+
+    getSpaceUsed(){
+      return (this.allFiles.length/100).toFixed(2);
     },
 
     uploadFile(event:any){
@@ -160,7 +177,7 @@ export default defineComponent({
   position: absolute;
   left: 0;
   right: 0;
-  top: 20%;
+  top: 40%;
   transform: translateY(-50%);
 }
 #title{
@@ -183,5 +200,8 @@ ion-fab-button{
 }
 image{
   height: 10px;
+}
+ion-card{
+  --background: #fff;
 }
 </style>
