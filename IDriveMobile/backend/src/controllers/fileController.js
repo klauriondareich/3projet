@@ -43,17 +43,12 @@ export const getFiles = async (req, res) =>{
     try {
 
         let userId = req.header('userId');
-        let data_arr = [];
         console.log("result", userId);
         initCon.connect(function() {
          
             var sql = `SELECT * FROM docs WHERE user_id="${userId}"`;
             initCon.query(sql, function (err, result) {
                 if (err) throw err;
-                console.log("result", result);
-                // data_arr.push(result[0]);
-                // console.log("array", data_arr);
-
                 return res.status(200).json(result)
             });
           });
