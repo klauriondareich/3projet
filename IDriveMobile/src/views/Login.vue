@@ -58,7 +58,8 @@ export default defineComponent({
       }, {headers: {'Access-Control-Allow-Origin': '*'}})
       .then( (response) => {
         if (response.status == 200){
-          localStorage.setItem('auth-token', response.data);
+          localStorage.setItem('auth-token', response.data.myToken);
+          localStorage.setItem('userId', response.data.userId);
           let authToken = localStorage.getItem('auth-token');
           if (authToken != "" || authToken != null){
             this.$router.push("/auth/home")

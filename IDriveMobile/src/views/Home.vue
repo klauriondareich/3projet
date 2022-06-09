@@ -47,8 +47,9 @@ export default defineComponent({
     IonImg
   },
   data(){
-    return{
-      file: ""
+    return {
+      file: "", 
+
     }
   },
   methods:{
@@ -66,6 +67,7 @@ export default defineComponent({
       let lastModified = event.target.files[0].lastModified;
       let lastModifiedDate = event.target.files[0].lastModifiedDate;
       let size = event.target.files[0].size;
+      let userId =  localStorage.getItem('userId');
 
       //Sending file in backend api
       axios.post('http://localhost:3000/api/v1/upload', {
@@ -74,7 +76,8 @@ export default defineComponent({
           type: type,
           size: size,
           lastModifiedDate: lastModifiedDate,
-          lastModified: lastModified
+          lastModified: lastModified,
+          userId: userId
         }, {headers: {
         'Access-Control-Allow-Origin': '*',
         'Content-Type': 'multipart/form-data'
