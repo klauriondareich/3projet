@@ -20,7 +20,7 @@
                 <ion-progress-bar color="primary" :value="getSpaceUsed()"></ion-progress-bar>
             </ion-card>
           <ion-list>
-            <ion-title id="title">Tous vos documents</ion-title>
+            <ion-title id="title">Tous vos fichiers</ion-title>
             <ion-item v-for="item in allFiles" :key="item.id">
               <ion-thumbnail slot="start">
                 <ion-img v-if="getFileType(item.file_type) == 'application'" src="/assets/pdf.png"></ion-img>
