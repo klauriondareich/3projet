@@ -18,7 +18,7 @@ export const  uploadFile = async (req, res) =>{
         let size = req.body.size;
         //Modified filename
         let file_path = req.file.filename;
-        let userId = localStorage.getItem('userId');
+        let userId =  req.body.userId;
 
         initCon.connect(function() {
 
