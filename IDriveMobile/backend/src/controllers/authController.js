@@ -35,7 +35,6 @@ export const registerUser = async (req, res) =>{
       let  sql_search_user = `SELECT * FROM users WHERE email="${email}"`;
       initCon.query(sql_search_user, function (err, result) {
           if (err) throw err;
-          console.log("result ", result);
           
           if (result.length == 0){
             // Insert user infos in database
@@ -68,7 +67,8 @@ export const loginUser = async (req, res) =>{
             
             // Generate token
             const myToken = jwt.sign({id: result[0].id}, "kld1SGSAHJLZHZZ");
-            return res.status(200).send(myToken);
+            let userId = result[0].id;
+            return res.status(200).send({myToken: myToken, userId: userId});
           }
           
         });

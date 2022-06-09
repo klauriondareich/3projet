@@ -18,10 +18,11 @@ export const  uploadFile = async (req, res) =>{
         let size = req.body.size;
         //Modified filename
         let file_path = req.file.filename;
+        let userId = localStorage.getItem('userId');
 
         initCon.connect(function() {
 
-            var sql = `INSERT INTO docs (nom, user_id, upload_date, size, file_type, file_path) VALUES ('${fileName}',1,'${lastModifiedDate}', '${size}', '${type}', '${file_path}')`;
+            var sql = `INSERT INTO docs (nom, user_id, upload_date, size, file_type, file_path) VALUES ('${fileName}','${userId}','${lastModifiedDate}', '${size}', '${type}', '${file_path}')`;
             initCon.query(sql, function (err) {
                 if (err) throw err;
                 return res.status(200).send({ message: "Fichier ajouté" })
