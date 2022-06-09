@@ -46,7 +46,7 @@ export const getFiles = async (req, res) =>{
         console.log("result", userId);
         initCon.connect(function() {
          
-            var sql = `SELECT * FROM docs WHERE user_id="${userId}"`;
+            var sql = `SELECT * FROM docs WHERE user_id="${userId}" ORDER BY id DESC`;
             initCon.query(sql, function (err, result) {
                 if (err) throw err;
                 return res.status(200).json(result)
