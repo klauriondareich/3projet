@@ -21,11 +21,12 @@
   </ion-page>
 </template>
 
-<script lang="ts">
+<script>
 
 import { defineComponent } from 'vue';
 import { IonPage, IonImg, IonContent, IonButton, IonLabel, IonInput, IonItem } from '@ionic/vue';
 import axios from 'axios';
+import config from '../env';
 
 export default defineComponent({
   name: 'LoginPage',
@@ -52,7 +53,7 @@ export default defineComponent({
     // This func register user in db
     loginUser(){
 
-      axios.post('http://localhost:3000/api/v1/login', {
+      axios.post(config.HOST_URL + '/api/v1/login', {
         email: this.email,
         password: this.password,
       }, {headers: {'Access-Control-Allow-Origin': '*'}})

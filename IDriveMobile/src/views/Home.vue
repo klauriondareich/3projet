@@ -38,13 +38,14 @@
   </ion-page>
 </template>
 
-<script lang="ts">
+<script>
 
 import { defineComponent, ref } from 'vue';
 import { IonPage, IonIcon, IonFab, IonFabButton, IonCardHeader,
     IonCardTitle, IonCard,IonContent, IonList, IonTitle, IonItem, IonLabel, IonButton, IonImg, IonThumbnail} from '@ionic/vue';
 import { homeOutline, personOutline, addOutline, documentAttachOutline } from 'ionicons/icons';
-import axios from 'axios';'../.'
+import axios from 'axios';
+import config from '../env';
 
 export default defineComponent({
   name: 'HomePage',
@@ -80,7 +81,7 @@ export default defineComponent({
       input?.click();
     },
 
-    getFileType(file:any){
+    getFileType(file){
       return file.split("/")[0];
     },
 
@@ -88,7 +89,7 @@ export default defineComponent({
       return (this.allFiles.length/100).toFixed(2);
     },
 
-    uploadFile(event:any){
+    uploadFile(event){
 
       this.file = event.target.files[0];
       let fileName = event.target.files[0].name;
@@ -99,7 +100,7 @@ export default defineComponent({
       let userId =  localStorage.getItem('userId');
 
       //Sending file in backend api
-      axios.post('http://localhost:3000/api/v1/upload', {
+      axios.post(config.HOST_URL + '/api/v1/upload', {
           file: this.file,
           fileName: fileName,
           type: type,
@@ -128,7 +129,7 @@ export default defineComponent({
     let token = localStorage.getItem("auth-token") || "";
     let userId = localStorage.getItem("userId") || "";
 
-    axios.get('http://localhost:3000/api/v1/files/all', {headers: {'Access-Control-Allow-Origin': '*', 'userId': userId, 'auth-token': token}})
+    axios.get(config.HOST_URL + '/api/v1/files/all', {headers: {'Access-Control-Allow-Origin': '*', 'userId': userId, 'auth-token': token}})
       .then( (response) => {
         if (response.status == 200){
           this.allFiles = response.data;
