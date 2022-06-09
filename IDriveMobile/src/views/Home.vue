@@ -5,11 +5,7 @@
           <ion-fab-button type="submit" ref="form" @click="toOpen()">
             <ion-icon :icon="addOutline"></ion-icon>
           </ion-fab-button>
-           <input type="file" name="file" @change="uploadFile($event)" >
-          <!-- <form method="post" enctype="multipart/form-data" action="http://localhost:3000/api/v1/upload">
-           
-            <input type="submit" id="submit">
-          </form> -->
+           <input type="file" name="file" @change="uploadFile($event)" id="input-file">
          
         </ion-fab>
         <div id="container">
