@@ -9,14 +9,19 @@
          
         </ion-fab>
         <div id="container">
+          
           <ion-list>
             <ion-title id="title">Tous vos documents</ion-title>
-            <ion-item v-for="item in folders" :key="item.title">
-              <ion-img src="/assets/pdf.png"></ion-img>
+            <ion-item v-for="item in allFiles" :key="item.id">
+              <ion-thumbnail slot="start">
+                <ion-img v-if="getFileType(item.file_type) == 'application'" src="/assets/pdf.png"></ion-img>
+                <ion-img v-if="getFileType(item.file_type) == 'image'" :src="'/uploads/' + item.file_path"></ion-img>
+              </ion-thumbnail>
+              <ion-badge color="primary">{{Math.round(item.size/1000)}} Ko</ion-badge>
               <ion-label class="folder-title">
-              {{item.title}}
+              {{item.nom}}
               </ion-label>
-              <ion-button size="small" type="upload" color="medium">Voir</ion-button>
+              <ion-button size="small" :href="'/uploads/' + item.file_path" type="upload" color="medium">Voir</ion-button>
             </ion-item>
           </ion-list>
         </div>
@@ -27,9 +32,9 @@
 <script lang="ts">
 
 import { defineComponent, ref } from 'vue';
-import { IonPage, IonIcon, IonFab, IonFabButton, IonContent, IonList, IonTitle, IonItem, IonLabel, IonButton, IonImg} from '@ionic/vue';
+import { IonPage, IonIcon, IonFab, IonFabButton, IonContent, IonList, IonTitle, IonItem, IonLabel, IonButton, IonImg, IonThumbnail} from '@ionic/vue';
 import { homeOutline, personOutline, addOutline, documentAttachOutline } from 'ionicons/icons';
-import axios from 'axios';
+import axios from 'axios';'../.'
 
 export default defineComponent({
   name: 'HomePage',
@@ -44,12 +49,15 @@ export default defineComponent({
     IonItem,
     IonLabel,
     IonButton,
-    IonImg
+    IonImg,
+    IonThumbnail
   },
   data(){
     return {
       file: "", 
-
+      allFiles: [
+        {id: null, file_type: "", size: 0, nom: "", file_path: ""}
+      ]
     }
   },
   methods:{
@@ -57,6 +65,10 @@ export default defineComponent({
     toOpen(){
       let input = document.getElementById("input-file");
       input?.click();
+    },
+
+    getFileType(file:any){
+      return file.split("/")[0];
     },
 
     uploadFile(event:any){
@@ -95,7 +107,24 @@ export default defineComponent({
     }
     
   },
-   setup() {
+  created(){
+    let token = localStorage.getItem("auth-token") || "";
+    let userId = localStorage.getItem("userId") || "";
+
+    axios.get('http://localhost:3000/api/v1/files/all', {headers: {'Access-Control-Allow-Origin': '*', 'userId': userId, 'auth-token': token}})
+      .then( (response) => {
+        if (response.status == 200){
+          this.allFiles = response.data;
+          console.log("response", response)
+        }
+        // this.errorMessage = response.data;
+      })
+      // .catch( (error) => {
+      //   if (error.response.status == 400){
+      //     this.errorMessage = error.response.data;
+      //   }});
+  },
+  setup() {
 
      const folders = [
        {title: "fichier 1"},
@@ -151,5 +180,8 @@ ion-fab-button{
 }
 #form-hide{
   visibility: hidden;
+}
+image{
+  height: 10px;
 }
 </style>
