@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 export const  authorization = (req, res, next) => {
 
     const token = req.header('auth-token');
-    if (!token) return res.status(401).send("No token found. ACCESS DENIED!");
+    if (!token) return res.status(401).send("Aucun token trouvé. ACCESS DENIED!");
 
     try{
         const checked = jwt.verify(token, "kld1SGSAHJLZHZZ");
@@ -11,6 +11,6 @@ export const  authorization = (req, res, next) => {
         next();
     }
     catch (err){
-        res.status(400).send("Token is invalid");
+        res.status(400).send("Token invalide");
     }
 }
