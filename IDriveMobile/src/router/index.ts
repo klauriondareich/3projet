@@ -7,16 +7,28 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import ('../views/Appbar.vue'),
     children:[
       {
+        name: "Home",
         path: '/auth/home',
-        component: () => import ('../views/Home.vue')
+        component: () => import ('../views/Home.vue'),
+        meta:{
+          requiresAuth: true,
+        }
       },
       {
+        name: "Account",
         path: '/auth/account',
-        component: () => import ('../views/Account.vue')
+        component: () => import ('../views/Account.vue'),
+        meta:{
+          requiresAuth: true,
+        }
       },
       {
+        name: "Documents",
         path: '/auth/documents',
-        component: () => import ('../views/ListDocuments.vue')
+        component: () => import ('../views/ListDocuments.vue'),
+        meta:{
+          requiresAuth: true,
+        } 
       }
     ]
   },
@@ -26,10 +38,12 @@ const routes: Array<RouteRecordRaw> = [
   },
   
   {
+    name: "Login",
     path: '/user/login',
     component: () => import ('../views/Login.vue')
   },
   {
+    name: "Register",
     path: '/user/register',
     component: () => import ('../views/Register.vue')
   },
@@ -38,6 +52,15 @@ const routes: Array<RouteRecordRaw> = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+router.beforeEach((to, from, next) =>{
+
+  const tokenExist = localStorage.getItem("auth-token") || null;
+
+  const requiresAuth = to.matched.some(route => route.meta.requiresAuth); 
+  if(requiresAuth && !tokenExist) next({name: "Login"}); // Redirect to login page when the non logged in user try to access pages
+  else if (!requiresAuth  && tokenExist) next({name: "Home"}) // Prevent from go to login or register page when the user is logged in
+  else next()
 })
 
 export default router
