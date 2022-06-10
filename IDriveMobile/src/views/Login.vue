@@ -58,7 +58,9 @@ export default defineComponent({
         password: this.password,
       }, {headers: {'Access-Control-Allow-Origin': '*'}})
       .then( (response) => {
+        console.log("response", response)
         if (response.status == 200){
+          this.errorMessage =  "request passed"
           localStorage.setItem('auth-token', response.data.myToken);
           localStorage.setItem('userId', response.data.userId);
           let authToken = localStorage.getItem('auth-token');
@@ -67,11 +69,11 @@ export default defineComponent({
           }
           return;
         }
-        this.errorMessage = response.data;
+        this.errorMessage = response.data.message;
       })
       .catch( (error) => {
         if (error.response.status == 400){
-          this.errorMessage = error.response.data;
+          this.errorMessage = error.response.data.message;
         }});
 
     }

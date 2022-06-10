@@ -68,17 +68,17 @@ export default defineComponent({
         blocked: false
     }, {headers: {'Access-Control-Allow-Origin': '*'}})
     .then( (response) => {
-      console.log(response)
+    
       if (response.status == 200){
-        this.successMessage = response.data;
+        this.successMessage = response.data.message;
         this.errorMessage = "";
         return;
       }
-      this.errorMessage = response.data;
+      this.errorMessage = response.data.message;
     })
     .catch( (error) => {
       if (error.response.status == 400){
-        this.errorMessage = error.response.data;
+        this.errorMessage = error.response.data.message;
       }});
 
     }
