@@ -1,6 +1,9 @@
 
 import initCon from '../../db.js';
 import uploadMiddleware from '../middleware/fileUpload.js'
+import ip from 'ip';
+
+
 
 export const  uploadFile = async (req, res) =>{
 
@@ -39,6 +42,7 @@ export const  uploadFile = async (req, res) =>{
 
 // Get all files
 export const getFiles = async (req, res) =>{
+    console.log(ip.address());
 
     try {
 

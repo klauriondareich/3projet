@@ -41,10 +41,10 @@ export const registerUser = async (req, res) =>{
             var sql = `INSERT INTO users (username, email, mdp, size_of_all_docs, blocked) VALUES ('${username}', '${email}', '${password}', '${doc_size}', '${blocked}')`;
             initCon.query(sql, function (err) {
               if (err) throw err;
-              return res.status(200).send("Votre compte a été crée avec succès!")
+              return res.status(200).send({message: "Votre compte a été crée avec succès!"})
             });
           }
-          else return res.status(400).send("L'adresse email existe déjà")
+          else return res.status(400).send({message:"L'adresse email existe déjà"})
           
         });
     });
@@ -60,10 +60,10 @@ export const loginUser = async (req, res) =>{
         initCon.query(sql, function (err, result) {
           if (err) throw err;
           console.log("result", result);
-          if (result.length == 0) return res.status(404).send("l'utilisateur n'existe pas");
+          if (result.length == 0) return res.status(400).send({ message: "l'utilisateur n'existe pas" });
           else if (result.length != 0) {
             const validPassword = bcrypt.compare(req.body.password, result[0].mdp);
-            if (!validPassword) return res.status(400).send("Mot de passe incorrect");
+            if (!validPassword) return res.status(400).send({ message: "Mot de passe incorrect" });
             
             // Generate token
             const myToken = jwt.sign({id: result[0].id}, "kld1SGSAHJLZHZZ");

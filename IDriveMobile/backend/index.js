@@ -10,6 +10,7 @@ app.use(cors({
   origin: '*'
 }));
 
+
 app.use(cors());
 
 // Body Parser config
