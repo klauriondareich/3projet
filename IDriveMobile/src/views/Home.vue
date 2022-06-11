@@ -22,20 +22,23 @@
 
             <!-- Modal -->
 
-            <ion-button @click="isOpenFunc()">Click to open modal</ion-button>
             <ion-modal :is-open="isOpen">
               <ion-content>
-                  <ion-button @click="isCloseFunc()">Click to close modal</ion-button>
-                  <!-- <ion-img v-if="getFileType(fileInfo.file_type) == 'application'" src="/assets/pdf.png"></ion-img> -->
+                  <ion-button size="small" style="float:right;" @click="isCloseFunc()" color="medium">Fermer</ion-button>
 
                   <!-- /PDF Viewer -->
-                  <pdf v-if="fileInfo.file_type == 'application/pdf'" src="/uploads/1654766622177-projet-fin-dannee.pdf">
+                  <pdf v-if="fileInfo.file_type == 'application/pdf'" style="margin-top: 20px" src="/uploads/1654766622177-projet-fin-dannee.pdf">
                     <template slot="loading">
                       loading content here...
                     </template>
                    </pdf>
 
-                  <ion-img v-if="getFileType(fileInfo.file_type) == 'image'" :src="'/uploads/' + fileInfo.file_path"></ion-img>
+                   <!-- Vido player -->
+                    <video style="margin-top: 20px" width="320" height="240" controls autoplay v-if="getFileType(fileInfo.file_type) == 'video'">
+                        <source src="/uploads/1654952989201-mohammed-ali.mp4" type="video/mp4">
+                    </video>
+
+                  <ion-img style="margin-top: 20px" v-if="getFileType(fileInfo.file_type) == 'image'" :src="'/uploads/' + fileInfo.file_path"></ion-img>
                   <ion-item>Fichier : {{fileInfo.nom}}</ion-item>
                   <ion-item>Type : {{fileInfo.file_type}}</ion-item>
                   <ion-item>Taille : <ion-badge color="secondary">{{Math.round(fileInfo.size/1000)}} Ko</ion-badge></ion-item>
@@ -50,6 +53,7 @@
               <ion-thumbnail slot="start">
                 <ion-img v-if="getFileType(item.file_type) == 'application'" src="/assets/pdf.png"></ion-img>
                 <ion-img v-if="getFileType(item.file_type) == 'image'" :src="'/uploads/' + item.file_path"></ion-img>
+                <ion-img v-if="getFileType(item.file_type) == 'video'" src="/assets/video.png"></ion-img>
               </ion-thumbnail>
               <ion-badge color="secondary">{{Math.round(item.size/1000)}} Ko</ion-badge>
               <ion-label class="folder-title">
@@ -57,6 +61,8 @@
               </ion-label>
               <ion-button size="small" @click="previewFile(item)" color="medium">Voir</ion-button>
             </ion-item>
+
+                     
           </ion-list>
         </div>
     </ion-content>
@@ -73,6 +79,7 @@ import axios from 'axios';
 import config from '../env';
 import pdf from 'pdfvuer'
 import 'pdfjs-dist/build/pdf.worker.entry'
+import VueVideoThumbnail from 'vue-video-thumbnail'
 
 export default defineComponent({
   name: 'HomePage',
@@ -93,7 +100,7 @@ export default defineComponent({
     IonCardHeader,
     IonCardTitle,
     IonCard,
-    pdf
+    pdf,
   },
   data(){
     return {
