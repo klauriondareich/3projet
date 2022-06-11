@@ -60,7 +60,6 @@ export default defineComponent({
       .then( (response) => {
         console.log("response", response)
         if (response.status == 200){
-          this.errorMessage =  "request passed"
           localStorage.setItem('auth-token', response.data.myToken);
           localStorage.setItem('userId', response.data.userId);
           let authToken = localStorage.getItem('auth-token');

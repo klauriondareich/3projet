@@ -20,6 +20,7 @@
           <ion-list>
             <ion-title id="title">Tous vos fichiers</ion-title>
 
+             <p class="error-msg">{{errorMessage}}</p>
             <!-- Modal -->
 
             <ion-modal :is-open="isOpen">
@@ -106,6 +107,7 @@ export default defineComponent({
       file: "", 
       isOpen: false,
       fileInfo: {},
+      errorMessage: null,
       allFiles: [
         {id: null, file_type: "", size: 0, nom: "", file_path: ""}
       ]
@@ -194,12 +196,12 @@ export default defineComponent({
           this.allFiles = response.data;
           console.log("response", response)
         }
-        // this.errorMessage = response.data;
+        this.errorMessage = response.data.message;
       })
-      // .catch( (error) => {
-      //   if (error.response.status == 400){
-      //     this.errorMessage = error.response.data;
-      //   }});
+      .catch( (error) => {
+        if (error.response.status == 400){
+          this.errorMessage = error.response.data.message;
+        }});
   },
   setup() {
 
@@ -234,7 +236,7 @@ export default defineComponent({
 }
 #container {
   text-align: center;
-  margin-top: 80%;
+  margin-top: 90%;
   transform: translateY(-50%);
 }
 #title{
@@ -260,5 +262,9 @@ image{
 }
 ion-card{
   --background: #fff;
+}
+.error-msg{
+  color: red;
+  padding-left: 30px;
 }
 </style>
