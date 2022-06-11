@@ -1,1 +1,0 @@
-Lien de la documentation sur postman : https://www.postman.com/winter-water-413020/workspace/3mern/collection/20394168-5dce9da4-58cf-4364-9880-80126c22abeb?action=share&creator=20394168&ctx=documentation

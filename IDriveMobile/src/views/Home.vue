@@ -71,7 +71,7 @@
 
 <script>
 
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 import { IonPage, IonModal, IonIcon, IonFab, IonFabButton, IonCardHeader,
     IonCardTitle, IonCard,IonContent, IonList, IonTitle, IonItem, IonLabel, IonButton, IonImg, IonThumbnail} from '@ionic/vue';
 import { homeOutline, personOutline, addOutline, documentAttachOutline } from 'ionicons/icons';
@@ -79,7 +79,6 @@ import axios from 'axios';
 import config from '../env';
 import pdf from 'pdfvuer'
 import 'pdfjs-dist/build/pdf.worker.entry'
-import VueVideoThumbnail from 'vue-video-thumbnail'
 
 export default defineComponent({
   name: 'HomePage',
