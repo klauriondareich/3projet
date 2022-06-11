@@ -16,10 +16,10 @@
                 <ion-label>Accueil</ion-label>
               </ion-tab-button>
 
-              <ion-tab-button tab="documents" href="/auth/documents">
+              <!-- <ion-tab-button tab="documents" href="/auth/documents">
                  <ion-icon :icon="documentAttachOutline"></ion-icon>
                 <ion-label>Mes Documents</ion-label>
-              </ion-tab-button>
+              </ion-tab-button> -->
 
               <ion-tab-button tab="account" href="/auth/account">
                  <ion-icon :icon="personOutline"></ion-icon>
