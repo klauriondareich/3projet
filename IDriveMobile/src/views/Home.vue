@@ -10,9 +10,7 @@
          
         </ion-fab>
         <div id="container">
-            <div>
-
-            </div>
+          
             <ion-card >
                 <ion-card-header>
                   <ion-card-title>Espace de stockage : {{getSpaceUsed()}}% utilisé</ion-card-title>
@@ -21,16 +19,43 @@
             </ion-card>
           <ion-list>
             <ion-title id="title">Tous vos fichiers</ion-title>
+
+            <!-- Modal -->
+
+            <ion-button @click="isOpenFunc()">Click to open modal</ion-button>
+            <ion-modal :is-open="isOpen">
+              <ion-content>
+                  <ion-button @click="isCloseFunc()">Click to close modal</ion-button>
+                  <!-- <ion-img v-if="getFileType(fileInfo.file_type) == 'application'" src="/assets/pdf.png"></ion-img> -->
+
+                  <!-- /PDF Viewer -->
+                  <pdf v-if="fileInfo.file_type == 'application/pdf'" src="/uploads/1654766622177-projet-fin-dannee.pdf">
+                    <template slot="loading">
+                      loading content here...
+                    </template>
+                   </pdf>
+
+                  <ion-img v-if="getFileType(fileInfo.file_type) == 'image'" :src="'/uploads/' + fileInfo.file_path"></ion-img>
+                  <ion-item>Fichier : {{fileInfo.nom}}</ion-item>
+                  <ion-item>Type : {{fileInfo.file_type}}</ion-item>
+                  <ion-item>Taille : <ion-badge color="secondary">{{Math.round(fileInfo.size/1000)}} Ko</ion-badge></ion-item>
+                  <ion-item>Date d'ajout : {{new Date(fileInfo.upload_date)}}</ion-item>
+                  
+              </ion-content>
+            </ion-modal>
+
+             <!-- Modal end-->
+
             <ion-item v-for="item in allFiles" :key="item.id">
               <ion-thumbnail slot="start">
                 <ion-img v-if="getFileType(item.file_type) == 'application'" src="/assets/pdf.png"></ion-img>
                 <ion-img v-if="getFileType(item.file_type) == 'image'" :src="'/uploads/' + item.file_path"></ion-img>
               </ion-thumbnail>
-              <ion-badge color="primary">{{Math.round(item.size/1000)}} Ko</ion-badge>
+              <ion-badge color="secondary">{{Math.round(item.size/1000)}} Ko</ion-badge>
               <ion-label class="folder-title">
               {{item.nom}}
               </ion-label>
-              <ion-button size="small" :href="'/uploads/' + item.file_path" type="upload" color="medium">Voir</ion-button>
+              <ion-button size="small" @click="previewFile(item)" color="medium">Voir</ion-button>
             </ion-item>
           </ion-list>
         </div>
@@ -41,17 +66,20 @@
 <script>
 
 import { defineComponent, ref } from 'vue';
-import { IonPage, IonIcon, IonFab, IonFabButton, IonCardHeader,
+import { IonPage, IonModal, IonIcon, IonFab, IonFabButton, IonCardHeader,
     IonCardTitle, IonCard,IonContent, IonList, IonTitle, IonItem, IonLabel, IonButton, IonImg, IonThumbnail} from '@ionic/vue';
 import { homeOutline, personOutline, addOutline, documentAttachOutline } from 'ionicons/icons';
 import axios from 'axios';
 import config from '../env';
+import pdf from 'pdfvuer'
+import 'pdfjs-dist/build/pdf.worker.entry'
 
 export default defineComponent({
   name: 'HomePage',
   components: {
     IonPage,
     IonIcon, 
+    IonModal,
     IonFab,
     IonFabButton,
     IonContent,
@@ -64,17 +92,42 @@ export default defineComponent({
     IonThumbnail,
     IonCardHeader,
     IonCardTitle,
-    IonCard
+    IonCard,
+    pdf
   },
   data(){
     return {
       file: "", 
+      isOpen: false,
+      fileInfo: {},
       allFiles: [
         {id: null, file_type: "", size: 0, nom: "", file_path: ""}
       ]
     }
   },
   methods:{
+
+    // open modal
+    isOpenFunc(){
+      this.isOpen = true;
+    },
+
+    // Close modal
+    isCloseFunc(){
+      this.isOpen = false;
+    },
+    
+    // preview file
+    previewFile(data){
+      this.fileInfo = data;
+      this.isOpenFunc()
+    },
+
+    openPdf(filePath){
+      let fullPath = this.file.applicationDirectory + '/uploads/' + filePath;
+      console.log("fullpath", fullPath)
+      // this.document.viewDocument(fullPath, `application/pdf`);
+    },
 
     toOpen(){
       let input = document.getElementById("input-file");
@@ -175,10 +228,7 @@ export default defineComponent({
 }
 #container {
   text-align: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 40%;
+  margin-top: 80%;
   transform: translateY(-50%);
 }
 #title{
