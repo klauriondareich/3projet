@@ -74,3 +74,22 @@ export const loginUser = async (req, res) =>{
         });
       });
 };
+
+// get user connected info
+export const getCurrentUser = async (req, res) =>{
+
+    let userId = req.header('userId');
+
+    initCon.connect(function() {
+
+        var sql = `SELECT * FROM users WHERE id="${userId}"`;
+        initCon.query(sql, function (err, result) {
+          if (err) throw err;
+          if (result.length == 0) return res.status(400).send({ message: "Erreur impossible de récupérer les infos de l'utilisateur" });
+          else if (result.length != 0) {
+            let userInfo = result[0];
+            return res.status(200).send(userInfo);
+          } 
+        });
+      });
+};
