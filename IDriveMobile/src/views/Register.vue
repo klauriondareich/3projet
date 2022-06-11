@@ -103,6 +103,7 @@ ion-button#login{
   --background:transparent;
   --color: #0455BF;
   margin: 0px 140px;
+  margin-bottom: 30px;
 }
 
 ion-label{
