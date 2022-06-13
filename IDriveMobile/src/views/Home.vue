@@ -28,7 +28,7 @@
                   <ion-button size="small" style="float:right;" @click="isCloseFunc()" color="medium">Fermer</ion-button>
 
                   <!-- /PDF Viewer -->
-                  <pdf v-if="fileInfo.file_type == 'application/pdf'" style="margin-top: 20px" src="/uploads/1654766622177-projet-fin-dannee.pdf">
+                  <pdf v-if="fileInfo.file_type == 'application/pdf'" style="margin-top: 50px" src="/uploads/1654766622177-projet-fin-dannee.pdf">
                     <template slot="loading">
                       loading content here...
                     </template>
