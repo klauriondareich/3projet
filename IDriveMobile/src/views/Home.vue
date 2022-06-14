@@ -49,6 +49,7 @@
             </ion-modal>
 
              <!-- Modal end-->
+            <!-- <ion-img style="margin-top: 20px" src=" /uploads/haruo.webp"></ion-img> -->
 
             <ion-item v-for="item in allFiles" :key="item.id">
               <ion-thumbnail slot="start">

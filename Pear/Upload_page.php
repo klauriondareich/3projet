@@ -10,7 +10,7 @@
 
 
 <?php
-	$target_dir = 'uploads/';
+	$target_dir = '../../IDriveMobile/public/uploads/';
 	$uploadOk = 1;
 
 	if(isset($_POST["submit"])){
