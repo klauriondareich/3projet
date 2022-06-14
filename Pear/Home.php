@@ -33,7 +33,10 @@
             <td>$file_type</td>
         </tr>
     </tbody>
-</table>";
+    </table>
+    </br>
+    <a href='Paste.php?id=$session_id&file=$filename'>Copy and Paste</a>
+    	";
 		}
 	}
 	?>
