@@ -1,8 +1,13 @@
 <?php
+session_start();
 $session_id = $_GET["id"];
 $file = $_GET["file"];
 
 echo "uploads/$file";
+
+if($_SESSION["logged"] != true){
+		header("Location: Login.php");
+	}
 
 ?>
 
@@ -25,5 +30,6 @@ if(isset($_REQUEST['destination']))
 	Destination : <input type="text" name="destination">
 	<input type="submit">
 </form>
+<a href="Index.php?id=<?php echo $session_id?>">Home</a>
 </body>
 </html>
