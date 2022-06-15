@@ -5,9 +5,16 @@
 </head>
 <body>
 	<?php
+	session_start();
 	require("Connexion/Connexion_db.php");
 	$session_id = $_GET['id'];
+
+	if($_SESSION["loggedUser"] != true){
+		header("Location: Login.php");
+	}
 	?>
+
+	<a href="Logout.php">Logout</a>
 
 	<?php
 	$sql_select = "SELECT * FROM docs WHERE user_id='$session_id'";
@@ -20,6 +27,9 @@
 			$upload_date = $row["upload_date"];
 			$size = $row["size"];
 			$file_type = $row["file_type"];
+			
+			
+     
 			echo "<table>
     <thead>
         <tr>
@@ -28,6 +38,8 @@
     </thead>
     <tbody>
         <tr>
+         <object data='uploads/$filename' width='300' height='200'></object> 
+        	<a href='uploads/$filename' target='_blank'>$filename</a>
             <td>$upload_date</td>
             <td>$size</td>
             <td>$file_type</td>
