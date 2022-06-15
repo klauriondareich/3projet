@@ -24,9 +24,10 @@
         				$id = $row["id"];
             			echo "<br>Connecté avec succès";
             			$_SESSION["id"] = $id;
+            			$_SESSION["loggedUser"] = true;
             			echo  $_SESSION["id"];
             			echo $id;
-            			header("location:Home.php?id=$id");
+            			header("location:Index.php?id=$id");
         			} else {
             			echo "<br>Utilisateur inexistant";
         			}
