@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Login</title>
+	<link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="login-body">
 	<?php
 		session_start();
 		require("Connexion/Connexion_db.php");
@@ -38,21 +42,25 @@
 		?>
 
 
-		<form class="login" action="Login.php" method="post">
-			<h1>Connexion</h1>
-		<div id="log">
-			<label for="email">Email</label>
-			</br>
-			<input type="email" id="email" name="email">
-			</br>
-			<label for="mdp">Mot de Passe</label>
-			</br>
-			<input type="password" id="mdp" name="mdp">
-			</br>
-			<input type="submit" name="submit" value="login" class="login-button">
-			<a href="Login_admin.php">Admin</a>
+		<div class="main-container-login">
+			<form class="login" id="login-form" action="Login.php" method="post">
+				<img src="assets/" alt="">
+				<h1>Connexion/Utilisateur</h1>
+				<div id="log">
+					<div>
+						<label for="email">Email</label>
+						<input type="email" id="email" name="email">
+					</div>
+					<div>
+						<label for="mdp">Mot de Passe</label>
+						<input type="password" id="mdp" name="mdp">
+					</div>
+					<button type="submit" name="submit">Se connecter</button>
+					<!-- <input type="submit" name="submit" value="login" class="login-button"> -->
+					<a href="Login_admin.php">Admin</a>
+				</div>
+			</form>
 		</div>
-</form>
 
 
 </body>
