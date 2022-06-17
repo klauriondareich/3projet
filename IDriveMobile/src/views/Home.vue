@@ -54,7 +54,7 @@
 
             <ion-item v-for="item in allFiles" :key="item.id">
               <ion-thumbnail slot="start">
-                <ion-img v-if="getFileType(item.file_type) == 'application'" src="/assets/pdf.png"></ion-img>
+                <ion-img v-if="getFileType(item.file_type) == 'application'" src="/assets/doc.png"></ion-img>
                 <ion-img v-if="getFileType(item.file_type) == 'image'" :src="'/uploads/' + item.file_path"></ion-img>
                 <ion-img v-if="getFileType(item.file_type) == 'video'" src="/assets/video.png"></ion-img>
               </ion-thumbnail>
