@@ -1,7 +1,7 @@
 import util from 'util';
 import multer from 'multer';
 
-let __basedir = "C:/Projets/3proj/i-drive-mobile/IDriveMobile/public";
+let __basedir = "C:/xampp/htdocs/3proj/IDriveMobile/public";
 
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
