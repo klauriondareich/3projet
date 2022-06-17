@@ -10,6 +10,7 @@
 <body class="admin-body">
 
 <div class="home-item">
+<?php include("shared/userHeader.php")?>
 <?php
 
 	require("Connexion/Connexion_db.php");
@@ -26,7 +27,8 @@
 
 	if(isset($_POST["submit"])){
 		$uploadOk = 1;
-		move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir . basename($_FILES["fileToUpload"]["name"]));
+		$file_path = time() . $_FILES["fileToUpload"]["name"];
+		move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir . basename($file_path));
 		echo "Fichier uploadé avec succès";
 		$filename = $_FILES["fileToUpload"]["name"];
 		$user_id = $session_id;
@@ -35,16 +37,16 @@
 		$size=$_FILES["fileToUpload"]["size"];
 		$file_type = pathinfo($filename, PATHINFO_EXTENSION);
 		try{
-				$sql = "INSERT INTO docs (nom, user_id, upload_date, size, file_type) VALUES (?,?,?,?,?)";
+				$sql = "INSERT INTO docs (nom, user_id, upload_date, size, file_type, file_path) VALUES (?,?,?,?,?,?)";
 				$stmt = $connexion->prepare($sql);
-				$stmt->execute([$filename, $user_id, $upload_date, $size, $file_type]);
+				$stmt->execute([$filename, $user_id, $upload_date, $size, $file_type, $file_path]);
 			}catch(PDOexception $e){
 				echo $sql . "</br>" . $e->getMessage();
 			}
 		
 	}
 ?>
-	<?php include("shared/userHeader.php")?> 
+
 	<form class="form-state" action="Upload_page.php?id=<?php echo $session_id?>" method="post" enctype="multipart/form-data">
 	Selectionner une image
 	<input type="file" name="fileToUpload" id="fileToUpload">
