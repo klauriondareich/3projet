@@ -238,8 +238,7 @@ export default defineComponent({
 }
 #container {
   text-align: center;
-  margin-top: 70%;
-  transform: translateY(-50%);
+  padding-top: 100px;
 }
 #title{
   font-weight: bold;
