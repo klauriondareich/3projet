@@ -4,11 +4,17 @@
 <head>
 	<meta charset="utf-8">
 	<title>Register</title>
-
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 
-<body>
+<body class="login-body">
 
+
+
+	<div class="main-container-login">
 	<?php
 	require('Connexion/Connexion_db.php');
 
@@ -26,7 +32,7 @@
 		$user = $stmt_select->fetch();
 		if($user)
 		{
-			echo "Utilisateur existant!";
+			echo "<p class='msg'>Utilisateur existant!</p>";
 		}
 		else
 		{
@@ -39,38 +45,35 @@
 			}
 			if($stmt)
 			{
-				echo "<h3>Compte créé<h3></br><a href='Login.php'>Connectez vous</a>";
+				echo "<p class='msg'>Compte créé</br><a href='Login.php'>Connectez vous</a></p>";
 			}
 		}
 	}
 	?>
-
-
-
-	<form class="register" action="Register.php" method="post">
-		<h1 class="register-title">Créez votre compte</h1>
-
-		<div id="div-register">
-			<label for="username">Nom d'utilisateur</label>
-			</br>
-			<input type="text" id="username" name="username">
-			</br>
-			<label for="email">Email</label>
-			</br>
-			<input type="email" id="email" name="email">
-			</br>
-			<label for="mdp">Mot de passe</label>
-			</br>
-			<input type="password" id="mdp" name="mdp">
-			</br>
-			<input type="submit" name="submit" value="Enregistrer" class="register-button">
-		</div>
-
-		<div id="already-account">
+		<form class="login" id="login-form" action="Register.php" method="post">
+			<img src="assets/" alt="">
+			<h1>Créer votre compte</h1>
+			<div id="log">
+				<div>
+					<label for="username">username</label>
+					<input type="username" id="username" name="username">
+				</div>
+				<div>
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email">
+				</div>
+				<div>
+					<label for="mdp">Mot de Passe</label>
+					<input type="password" id="mdp" name="mdp">
+				</div>
+				<button type="submit" name="submit">Créer maintenant</button>
+			</div>
+			<div id="already-account">
 			<p class="login-directly">Déjà membre ? </p>
 			<a href="Login.php">Connectez vous</a>
 		</div>
-	</form>
+		</form>
+	</div>
 
 </body>
 

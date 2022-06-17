@@ -1,7 +1,15 @@
 <!DOCTYPE html>
 <html>
-<body>
+<head>
+	<meta charset="UTF-8">
+	<title>Upload Page</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="admin-body">
 
+<div class="home-item">
 <?php
 
 	require("Connexion/Connexion_db.php");
@@ -36,16 +44,16 @@
 		
 	}
 ?>
+	<?php include("shared/userHeader.php")?> 
+	<form class="form-state" action="Upload_page.php?id=<?php echo $session_id?>" method="post" enctype="multipart/form-data">
+	Selectionner une image
+	<input type="file" name="fileToUpload" id="fileToUpload">
+	<button type="submit" class="state-btn" name="submit">Upload l'image</button>
+	</form>
 
-<form action="Upload_page.php?id=<?php echo $session_id?>" method="post" enctype="multipart/form-data">
-  Select image to upload:
-  <input type="file" name="fileToUpload" id="fileToUpload">
-  <input type="submit" value="Upload Image" name="submit">
-</form>
+<a href="Index.php?id=<?php echo $session_id?>">Retour à l'accueil</a>
 
-<a href="Index.php?id=<?php echo $session_id?>">Home</a>
-
-	
+</div>	
 
 	
 

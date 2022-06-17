@@ -25,7 +25,7 @@
 		<tr>
 			<th>Nom du fichier</th>
 			<th>Date d'ajout</th>
-			<th>Taille</th>
+			<th>Taille (Ko)</th>
 			<th>Type de fichier</th>
 			<th>Preview</th>
 			<th>Actions</th>
@@ -44,7 +44,6 @@
 			$file_type = $row["file_type"];
 			$file_path = $row["file_path"];
 			
-			// <object data='C:/xampp/htdocs/3proj/IDriveMobile/public/uploads/$filename' width='300' height='200'></object> 
      
 			echo "
 			<tr>
