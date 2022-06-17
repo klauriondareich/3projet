@@ -3,8 +3,13 @@
 <body>
 
 <?php
+session_start();
 	require("Connexion/Connexion_db.php");
 	$session_id = $_GET['id'];
+
+	if($_SESSION["logged"] != true){
+		header("Location: Login.php");
+	}
 	?>
 
 
@@ -40,7 +45,7 @@
   <input type="submit" value="Upload Image" name="submit">
 </form>
 
-<a href="Home.php?id=<?php echo $session_id?>">Home</a>
+<a href="Index.php?id=<?php echo $session_id?>">Home</a>
 
 	
 
