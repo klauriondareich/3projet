@@ -38,8 +38,8 @@
     </thead>
     <tbody>
         <tr>
-         <object data='uploads/$filename' width='300' height='200'></object> 
-        	<a href='uploads/$filename' target='_blank'>$filename</a>
+         <object data='C:/xampp/htdocs/3proj/IDriveMobile/public/uploads//$filename' width='300' height='200'></object> 
+        	<a href='C:/xampp/htdocs/3proj/IDriveMobile/public/uploads/$filename' target='_blank'>$filename</a>
             <td>$upload_date</td>
             <td>$size</td>
             <td>$file_type</td>
