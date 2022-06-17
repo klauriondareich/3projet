@@ -1,13 +1,10 @@
 <template>
-  <ion-app>
      <ion-page>
         <ion-header collapse="fade">
           <div>
               <ion-title>IDrive Mobile</ion-title>
           </div>
-          <!-- <div id="subheader">
-            <ion-title>Hello Laurion!</ion-title>
-          </div> -->
+        
         </ion-header>
         <ion-tabs>
             <ion-tab-bar slot="bottom">
@@ -15,11 +12,6 @@
                  <ion-icon :icon="homeOutline"></ion-icon>
                 <ion-label>Accueil</ion-label>
               </ion-tab-button>
-
-              <!-- <ion-tab-button tab="documents" href="/auth/documents">
-                 <ion-icon :icon="documentAttachOutline"></ion-icon>
-                <ion-label>Mes Documents</ion-label>
-              </ion-tab-button> -->
 
               <ion-tab-button tab="account" href="/auth/account">
                  <ion-icon :icon="personOutline"></ion-icon>
@@ -30,18 +22,15 @@
         </ion-tabs>
       
     </ion-page>
-  </ion-app>
 </template>
 <script lang="ts">
-import { IonApp, IonTitle, IonTabButton, IonTabs,IonTabBar, IonIcon, IonLabel, IonRouterOutlet, IonHeader } from '@ionic/vue';
+import {IonTitle, IonPage, IonTabButton, IonTabs,IonTabBar, IonIcon, IonLabel, IonRouterOutlet, IonHeader } from '@ionic/vue';
 import { defineComponent, ref } from 'vue';
-// import { useRoute } from 'vue-router';
 import { homeOutline, personOutline, documentAttachOutline } from 'ionicons/icons';
 
 export default defineComponent({
   name: 'App',
   components: {
-    IonApp, 
     IonLabel,
     IonTabButton,
     IonTabBar,
@@ -49,34 +38,12 @@ export default defineComponent({
     IonIcon, 
     IonHeader,
     IonTitle, 
-    // IonToolbar,
+    IonPage,
     IonRouterOutlet, 
   },
   setup() {
 
     const selectedIndex = ref(0);
-    // const appPages = [
-    //   {
-    //     title: 'Accueil',
-    //     url: '/auth/home',
-    //     iosIcon: homeOutline,
-    //     mdIcon: homeOutline
-    //   },
-    //   {
-    //     title: 'Mes documents',
-    //     url: '/auth/documents',
-    //     iosIcon: documentAttachOutline,
-    //     mdIcon: documentAttachOutline
-    //   },
-    //   {
-    //     title: 'Mon compte',
-    //     url: '/auth/account',
-    //     iosIcon: personOutline,
-    //     mdIcon: personOutline
-    //   }
-    // ];
-    
-    // const route = useRoute();
     
     return { 
       selectedIndex,

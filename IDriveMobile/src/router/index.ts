@@ -55,7 +55,7 @@ const router = createRouter({
 })
 router.beforeEach((to, from, next) =>{
 
-  const tokenExist = localStorage.getItem("auth-token") || null;
+  const tokenExist = localStorage.getItem("auth-token") || "";
 
   const requiresAuth = to.matched.some(route => route.meta.requiresAuth); 
   if(requiresAuth && !tokenExist) next({name: "Login"}); // Redirect to login page when the non logged in user try to access pages

@@ -20,8 +20,10 @@
         <ion-label position="floating">Mot de passe</ion-label>
         <ion-input type="password" v-model="password"></ion-input>
       </ion-item>
-       <ion-button shape="round" expand="block" type="submit" id="register" @click="registerUser()">S'inscrire</ion-button>
-       <ion-button id="login" href="/user/login">Se connecter</ion-button>
+        <ion-button shape="round" expand="block" type="submit" id="register" @click="registerUser()">S'inscrire</ion-button>
+        <router-link to="/user/login">
+          <ion-button id="login">Se connecter</ion-button>
+        </router-link>
     </ion-content>
   </ion-page>
 </template>
@@ -70,8 +72,13 @@ export default defineComponent({
     .then( (response) => {
     
       if (response.status == 200){
+
         this.successMessage = response.data.message;
+        
         this.errorMessage = "";
+        this.username = "";
+        this.email = "";
+        this.password = "";
         return;
       }
       this.errorMessage = response.data.message;

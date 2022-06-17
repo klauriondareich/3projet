@@ -21,6 +21,7 @@
             <ion-title id="title">Tous vos fichiers</ion-title>
 
              <p class="error-msg">{{errorMessage}}</p>
+             <p v-if="allFiles.length == 0" class="error-msg">Aucun fichier pour l'instant</p>
             <!-- Modal -->
 
             <ion-modal :is-open="isOpen">
@@ -39,7 +40,7 @@
                         <source src="/uploads/1654952989201-mohammed-ali.mp4" type="video/mp4">
                     </video>
 
-                  <ion-img style="margin-top: 20px" v-if="getFileType(fileInfo.file_type) == 'image'" :src="'/uploads/' + fileInfo.file_path"></ion-img>
+                  <ion-img style="margin-top: 20px" v-if="getFileType(fileInfo.file_type) == 'image'" :src="'uploads/' + fileInfo.file_path"></ion-img>
                   <ion-item>Fichier : {{fileInfo.nom}}</ion-item>
                   <ion-item>Type : {{fileInfo.file_type}}</ion-item>
                   <ion-item>Taille : <ion-badge color="secondary">{{Math.round(fileInfo.size/1000)}} Ko</ion-badge></ion-item>
@@ -237,7 +238,7 @@ export default defineComponent({
 }
 #container {
   text-align: center;
-  margin-top: 90%;
+  margin-top: 70%;
   transform: translateY(-50%);
 }
 #title{

@@ -16,7 +16,10 @@
         <ion-input type="password" v-model="password"></ion-input>
       </ion-item>
        <ion-button shape="round" expand="block" id="login" @click="loginUser()">Se connecter</ion-button>
-       <ion-button id="register" type="submit" href="/user/register">S'inscrire</ion-button>
+       <router-link to="/user/register">
+        <ion-button id="register">S'inscrire</ion-button>
+       </router-link>
+       <!-- <ion-button id="register" type="submit" href="/user/register">S'inscrire</ion-button> -->
     </ion-content>
   </ion-page>
 </template>
@@ -64,6 +67,8 @@ export default defineComponent({
           localStorage.setItem('userId', response.data.userId);
           let authToken = localStorage.getItem('auth-token');
           if (authToken != "" || authToken != null){
+            this.email = "";
+            this.password = "";
             this.$router.push("/auth/home")
           }
           return;
@@ -83,6 +88,7 @@ export default defineComponent({
 <style scoped>
 #container {
   padding-top: 20%;
+  padding-bottom: 10%;
 }
 .form-marg{
   margin: 20px;
