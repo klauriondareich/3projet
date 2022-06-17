@@ -46,24 +46,8 @@
 
 <div class="home-item">
 
-	<?php
-
-		if(isset($_POST["logout"])){
-
-			session_destroy();
-			header("Location: Login_admin.php");
-			exit(); 
-		}
-		
-	?> 
-	<div class="admin-item">
-		<h1>Administration IDrive 
-		<form action="" method="post">
-			<button class="logout-btn" type="submit" name="logout">
-				Se déconnecter
-			</button>
-        </form>
-	</div>
+		<?php
+	 include("shared/adminHeader.php")?> 
 
 	<?php
 
@@ -134,7 +118,7 @@
 				<td>$email</td>
 				<td> $size_all</td>
 				<td>". ($blocked == 0 ? "Débloqué" : "Bloqué") ."</td>
-				<td><a href='Home.php?id=$user_id' class='imp-style' target='_blank'>Impersonate User</a></td>
+				<td><a href='Impersonate.php?id=$user_id' class='imp-style' target='_blank'>Impersonate User</a></td>
         	</tr>";
 		}
 	}
