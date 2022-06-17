@@ -60,7 +60,6 @@ export default defineComponent({
 
   created(){
     let token = localStorage.getItem("auth-token") || "";
-    console.log("executed")
     let userId = localStorage.getItem("userId") || "";
 
     axios.get(config.HOST_URL + '/api/v1/current_user', {headers: {'Access-Control-Allow-Origin': '*', 'userId': userId, 'auth-token': token}})
