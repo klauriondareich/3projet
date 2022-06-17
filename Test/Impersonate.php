@@ -37,7 +37,7 @@
     </thead>
     <tbody>
         <tr>
-         <object data='uploads/$filename' width='300' height='200'></object> 
+         <object data='C:/xampp/htdocs/3proj/IDriveMobile/public/uploads/$filename' width='300' height='200'></object> 
         	<a href='uploads/$filename' target='_blank'>$filename</a>
             <td>$upload_date</td>
             <td>$size</td>
