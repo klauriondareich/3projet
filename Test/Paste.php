@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 $session_id = $_GET["id"];
 $file = $_GET["file"];
 
