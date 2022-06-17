@@ -29,7 +29,7 @@
                   <ion-button size="small" style="float:right;" @click="isCloseFunc()" color="medium">Fermer</ion-button>
 
                   <!-- /PDF Viewer -->
-                  <pdf v-if="fileInfo.file_type == 'application/pdf'" style="margin-top: 50px" src="/uploads/1654766622177-projet-fin-dannee.pdf">
+                  <pdf v-if="fileInfo.file_type == 'application/pdf'" style="margin-top: 50px" :src="'/uploads/' + fileInfo.file_path">
                     <template slot="loading">
                       loading content here...
                     </template>
@@ -37,10 +37,10 @@
 
                    <!-- Vido player -->
                     <video style="margin-top: 20px" width="320" height="240" controls autoplay v-if="getFileType(fileInfo.file_type) == 'video'">
-                        <source src="/uploads/1654952989201-mohammed-ali.mp4" type="video/mp4">
+                        <source :src="'/uploads/' + fileInfo.file_path" type="video/mp4">
                     </video>
 
-                  <ion-img style="margin-top: 20px" v-if="getFileType(fileInfo.file_type) == 'image'" :src="'uploads/' + fileInfo.file_path"></ion-img>
+                  <ion-img style="margin-top: 20px" v-if="getFileType(fileInfo.file_type) == 'image'" :src="'/uploads/' + fileInfo.file_path"></ion-img>
                   <ion-item>Fichier : {{fileInfo.nom}}</ion-item>
                   <ion-item>Type : {{fileInfo.file_type}}</ion-item>
                   <ion-item>Taille : <ion-badge color="secondary">{{Math.round(fileInfo.size/1000)}} Ko</ion-badge></ion-item>
@@ -177,13 +177,32 @@ export default defineComponent({
         }})
       .then( (response) => {
         if (response.status == 200){
-          console.log("response", response)
+           let token = localStorage.getItem("auth-token") || "";
+           let userId = localStorage.getItem("userId") || "";
+           this.getAllFiles(token, userId);
         }
-        // this.errorMessage = response.data;
       })
       .catch( (error) => {
         if (error.response.status == 400){
          console.log(error.response.data);
+        }});
+    },
+
+
+    // Getting all files from the api
+    
+    getAllFiles(token, userId){
+      axios.get(config.HOST_URL + '/api/v1/files/all', {headers: {'Access-Control-Allow-Origin': '*', 'userId': userId, 'auth-token': token}})
+      .then( (response) => {
+        if (response.status == 200){
+          this.allFiles = response.data;
+          console.log("All files retrieved")
+        }
+        this.errorMessage = response.data.message;
+      })
+      .catch( (error) => {
+        if (error.response.status == 400){
+          this.errorMessage = error.response.data.message;
         }});
     }
     
@@ -192,18 +211,7 @@ export default defineComponent({
     let token = localStorage.getItem("auth-token") || "";
     let userId = localStorage.getItem("userId") || "";
 
-    axios.get(config.HOST_URL + '/api/v1/files/all', {headers: {'Access-Control-Allow-Origin': '*', 'userId': userId, 'auth-token': token}})
-      .then( (response) => {
-        if (response.status == 200){
-          this.allFiles = response.data;
-          console.log("response", response)
-        }
-        this.errorMessage = response.data.message;
-      })
-      .catch( (error) => {
-        if (error.response.status == 400){
-          this.errorMessage = error.response.data.message;
-        }});
+    this.getAllFiles(token, userId);
   },
   setup() {
 
