@@ -3,7 +3,7 @@
 $session_id = $_GET["id"];
 $file = $_GET["file"];
 
-echo "uploads/$file";
+
 
 if($_SESSION["logged"] != true){
 		header("Location: Login.php");
@@ -15,7 +15,7 @@ if($_SESSION["logged"] != true){
 <?php
 if(isset($_REQUEST['destination']))
 {
-	$source = "uploads/$file";
+	$source = "C:/xampp/htdocs/3proj/IDriveMobile/public/uploads/$file";
 	$destination = $_POST["destination"];
 
 	if(copy($source, "$destination/$file"))
