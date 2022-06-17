@@ -3,7 +3,7 @@
 <body>
 
 <?php
-session_start();
+
 	require("Connexion/Connexion_db.php");
 	$session_id = $_GET['id'];
 
