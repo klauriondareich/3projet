@@ -17,11 +17,12 @@
                 </ion-card-header>
                 <ion-progress-bar color="primary" :value="getSpaceUsed()"></ion-progress-bar>
             </ion-card>
+            <input class="input-search" placeholder="Rechercher un fichier" v-model="searchItem" @input="searchElement">
           <ion-list>
             <ion-title id="title">Tous vos fichiers</ion-title>
 
              <p class="error-msg">{{errorMessage}}</p>
-             <p v-if="allFiles.length == 0" class="error-msg">Aucun fichier pour l'instant</p>
+             <p v-if="searchElement().length == 0" class="error-msg">Aucun fichier pour l'instant</p>
             <!-- Modal -->
 
             <ion-modal :is-open="isOpen">
@@ -52,7 +53,7 @@
              <!-- Modal end-->
             <!-- <ion-img style="margin-top: 20px" src=" /uploads/haruo.webp"></ion-img> -->
 
-            <ion-item v-for="item in allFiles" :key="item.id">
+            <ion-item v-for="item in searchElement()" :key="item.id">
               <ion-thumbnail slot="start">
                 <ion-img v-if="getFileType(item.file_type) == 'application'" src="/assets/doc.png"></ion-img>
                 <ion-img v-if="getFileType(item.file_type) == 'image'" :src="'/uploads/' + item.file_path"></ion-img>
@@ -110,6 +111,7 @@ export default defineComponent({
       isOpen: false,
       fileInfo: {},
       errorMessage: null,
+      searchItem: null,
       allFiles: [
         {id: null, file_type: "", size: 0, nom: "", file_path: ""}
       ]
@@ -135,7 +137,6 @@ export default defineComponent({
 
     openPdf(filePath){
       let fullPath = this.file.applicationDirectory + '/uploads/' + filePath;
-      console.log("fullpath", fullPath)
       // this.document.viewDocument(fullPath, `application/pdf`);
     },
 
@@ -150,6 +151,10 @@ export default defineComponent({
 
     getSpaceUsed(){
       return (this.allFiles.length/100).toFixed(2);
+    },
+
+    searchElement(){
+      return this.allFiles.filter(data => !this.searchItem || data.nom.toLowerCase().includes(this.searchItem.toLowerCase()))
     },
 
     uploadFile(event){
@@ -275,5 +280,16 @@ ion-card{
 .error-msg{
   color: red;
   padding-left: 30px;
+}
+.input-search{
+  border: none;
+  border-bottom: 2px solid #0052cc;
+  padding: 5px;
+  margin-top: 10px;
+}
+.input-search:focus{
+    border: none;
+  border-left:  2px solid #0052cc;
+  outline: none;
 }
 </style>
