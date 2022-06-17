@@ -15,7 +15,7 @@
 
 
 <?php
-	$target_dir = 'uploads/';
+	$target_dir = 'C:/xampp/htdocs/3proj/IDriveMobile/public/uploads/';
 	$uploadOk = 1;
 
 	if(isset($_POST["submit"])){
