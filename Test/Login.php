@@ -21,13 +21,15 @@
 				
 				while($row = $login->fetch(PDO::FETCH_ASSOC)){
         			if (password_verify($mdp, $row["mdp"])) {
+        				if($row["blocked"]==1){header("location:Blocked.php");}
+        					else{
         				$id = $row["id"];
             			echo "<br>Connecté avec succès";
             			$_SESSION["id"] = $id;
             			$_SESSION["loggedUser"] = true;
             			echo  $_SESSION["id"];
             			echo $id;
-            			header("location:Index.php?id=$id");
+            			header("location:Index.php?id=$id");}
         			} else {
             			echo "<br>Utilisateur inexistant";
         			}
