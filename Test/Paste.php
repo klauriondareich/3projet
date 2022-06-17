@@ -5,9 +5,7 @@ $file = $_GET["file"];
 
 
 
-if($_SESSION["logged"] != true){
-		header("Location: Login.php");
-	}
+
 
 ?>
 
