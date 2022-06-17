@@ -18,6 +18,7 @@
 		$email = $_REQUEST['email'];
 		$mdp = $_REQUEST['mdp'];
 		$mdp = password_hash($mdp, PASSWORD_DEFAULT);
+		$size_of_all_docs = 0;
 
 		$sql_select = "SELECT * FROM users WHERE username=?";
 		$stmt_select = $connexion->prepare($sql_select);
@@ -30,9 +31,9 @@
 		else
 		{
 			try {
-				$sql = "INSERT INTO users (username, email, mdp) VALUES (?,?,?)";
+				$sql = "INSERT INTO users (username, email, mdp, size_of_all_docs) VALUES (?,?,?,?)";
 				$stmt = $connexion->prepare($sql);
-				$stmt->execute([$username, $email, $mdp]);
+				$stmt->execute([$username, $email, $mdp, $size_of_all_docs]);
 			}catch(PDOexception $e){
 				echo $sql . "</br>" . $e->getMessage();
 			}

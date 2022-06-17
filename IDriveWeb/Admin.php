@@ -8,9 +8,40 @@
 	<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body class="admin-body">
-	<?php
+<?php
+	session_start();
 	require("Connexion/Connexion_db.php");
 	$session_id = $_GET['id'];
+
+	if($_SESSION["loggedAdmin"] != true){
+		header("Location: Login_admin.php");
+	}
+	?>
+
+	<?php
+	$sql1 = "SELECT COUNT(id) AS count FROM users";
+	$count=$connexion->query($sql1);
+
+	while($row = $count->fetch(PDO::FETCH_ASSOC)){
+		$nb_users = $row["count"];
+	}
+
+	$nb = 1;
+	while($nb <= $nb_users)
+	{
+	$sql = "SELECT SUM(size) AS ouais FROM docs WHERE user_id='$nb'";
+	$docs=$connexion->query($sql);
+	
+	if($docs->rowCount()>0)
+	{
+		while($row = $docs->fetch(PDO::FETCH_ASSOC)){
+			$totalsize = $row["ouais"];
+			$sql_command = "UPDATE users SET size_of_all_docs='$totalsize' WHERE id='$nb'";
+			$command_exec=$connexion->query($sql_command);
+		}
+	}
+	$nb = $nb + 1;
+}
 	?>
 
 <div class="home-item">
@@ -34,12 +65,53 @@
         </form>
 	</div>
 
+	<?php
+
+		if (isset($_REQUEST["id"]))
+		{
+			$id = $_REQUEST["id"];
+
+			$sql_update1 = "UPDATE users SET blocked=1 WHERE id=$id";
+			$update1=$connexion->query($sql_update1);
+		}
+
+	
+
+		?>
+		<form class="form-state" action="Admin.php?id=<?php echo $session_id?>" method="post">
+			<h2>Bloquer un utilisateur</h2>
+			<label for="id">Id de l'utilisateur</label>
+			<input type="int" id="id" name="id">
+			<button type="submit" name="submit" class="state-btn">Bloquer</button>	
+		</form>
+
+	<?php
+
+		if (isset($_REQUEST["id_unblock"]))
+		{
+			$id = $_REQUEST["id_unblock"];
+
+			$sql_update2 = "UPDATE users SET blocked=0 WHERE id=$id";
+			$update2=$connexion->query($sql_update2);
+		}
+	
+
+		?>
+		
+	<form class="form-state" action="Admin.php?id=<?php echo $session_id?>" method="post">
+			<h2>Débloquer un utilisateur</h2>
+			<label for="id_unblock">Id de l'utilisateur</label>
+			<input type="int" id="id_unblock" name="id_unblock">
+			<button type="submit" name="submit" class="state-btn">DéBloquer</button>
+	</form>
+	
+
 	<table class="table-view">
 		<tr>
 			<th>ID</th>
 			<th>Utilisateur</th>
 			<th>Email</th>
-			<th>Espace utilisé</th>
+			<th>Espace utilisé (Ko)</th>
 			<th>Status du compte</th>
 			<th>Impersonate</th>
 		</tr>
@@ -60,15 +132,15 @@
 				<td>$user_id</td>
 				<td>$nom</td>
 				<td>$email</td>
-				<td>$size_all</td>
-				<td>$blocked</td>
-				<td><a href='Home.php?id=$user_id' target='_blank'>Impersonate User</a></td>
+				<td> $size_all</td>
+				<td>". ($blocked == 0 ? "Débloqué" : "Bloqué") ."</td>
+				<td><a href='Home.php?id=$user_id' class='imp-style' target='_blank'>Impersonate User</a></td>
         	</tr>";
 		}
 	}
 	?>
 	</table>
-	
+
 	</div>
 	
 </body>

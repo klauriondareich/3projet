@@ -5,13 +5,12 @@
 </head>
 <body>
 	<?php
-	session_start();
+	
 	require("Connexion/Connexion_db.php");
 	$session_id = $_GET['id'];
 
-	if($_SESSION["loggedUser"] != true){
-		header("Location: Login.php");
-	}
+	
+	
 	?>
 
 	<a href="Logout.php">Logout</a>
@@ -38,8 +37,8 @@
     </thead>
     <tbody>
         <tr>
-         <object data='C:/xampp/htdocs/3proj/IDriveMobile/public/uploads//$filename' width='300' height='200'></object> 
-        	<a href='C:/xampp/htdocs/3proj/IDriveMobile/public/uploads/$filename' target='_blank'>$filename</a>
+         <object data='C:/xampp/htdocs/3proj/IDriveMobile/public/uploads/$filename' width='300' height='200'></object> 
+        	<a href='uploads/$filename' target='_blank'>$filename</a>
             <td>$upload_date</td>
             <td>$size</td>
             <td>$file_type</td>

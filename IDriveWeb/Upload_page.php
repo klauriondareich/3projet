@@ -3,19 +3,17 @@
 <body>
 
 <?php
-session_start();
+
 	require("Connexion/Connexion_db.php");
 	$session_id = $_GET['id'];
 
-	if($_SESSION["logged"] != true){
-		header("Location: Login.php");
-	}
+	
 	?>
 
 
 
 <?php
-	$target_dir = '../IDriveMobile/public/uploads/';
+	$target_dir = 'C:/xampp/htdocs/3proj/IDriveMobile/public/uploads/';
 	$uploadOk = 1;
 
 	if(isset($_POST["submit"])){

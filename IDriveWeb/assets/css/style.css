@@ -13,6 +13,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover
 }
+
 .admin-body{
     background-color: #fff; 
 }
@@ -95,4 +96,37 @@ table {
 .admin-item form{
     float: right;
     margin-right: 20px;
+}
+.admin-item{
+    background-image: url("../img/bg.png");
+    background-repeat: no-repeat;
+    background-size: cover
+}
+.admin-item h1{
+    color: #fff;
+}
+.state-btn{
+    border: 0;
+    text-align: center;
+    padding: 8px 16px;
+    border-radius: 7px;
+    color: white;
+    background-color: #0052cc;
+    cursor: pointer;
+}
+.form-state{
+    display: inline-block;
+    border: 1px solid #e8e9ee;
+    padding: 30px;
+    margin: 20px;
+}
+.imp-style{
+    text-decoration: none;
+    color: #0052cc;
+    border: 1px solid #e8e9ee;
+}
+.imp-style:hover{
+    text-decoration-line: underline;
+    color: #0052cc;
+    border: 1px solid #e8e9ee;
 }

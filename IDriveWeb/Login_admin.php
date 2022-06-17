@@ -28,6 +28,7 @@
         				$id = $row["id"];
             			echo "<br>Connecté avec succès";
             			$_SESSION["id"] = $id;
+            			$_SESSION["loggedAdmin"] = true;
             			header("location:Admin.php?id=$id");
         			} else {
             			echo "<br>Utilisateur inexistant";
