@@ -53,8 +53,8 @@ export default defineComponent({
     logout(){
       this.$router.push("/user/login");
       localStorage.removeItem("auth-token");
-      localStorage.setItem('auth-token', "")
-
+      localStorage.removeItem("userId");
+      window.location.reload(true);
     }
   },
 
