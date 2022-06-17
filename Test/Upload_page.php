@@ -7,9 +7,7 @@
 	require("Connexion/Connexion_db.php");
 	$session_id = $_GET['id'];
 
-	if($_SESSION["logged"] != true){
-		header("Location: Login.php");
-	}
+	
 	?>
 
 
