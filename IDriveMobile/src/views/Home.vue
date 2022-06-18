@@ -252,6 +252,7 @@ export default defineComponent({
 #container {
   text-align: center;
   padding-top: 100px;
+  padding-bottom: 100px;
 }
 #title{
   font-weight: bold;
