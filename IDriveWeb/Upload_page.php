@@ -48,9 +48,9 @@
 ?>
 
 	<form class="form-state" action="Upload_page.php?id=<?php echo $session_id?>" method="post" enctype="multipart/form-data">
-	Selectionner une image
+	Selectionner un fichier
 	<input type="file" name="fileToUpload" id="fileToUpload">
-	<button type="submit" class="state-btn" name="submit">Upload l'image</button>
+	<button type="submit" class="state-btn" name="submit">Upload le fichier</button>
 	</form>
 
 <a href="Index.php?id=<?php echo $session_id?>">Retour à l'accueil</a>

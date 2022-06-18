@@ -59,7 +59,7 @@
 					</div>
 					<button type="submit" name="submit">Se connecter</button>
 					<!-- <input type="submit" name="submit" value="login" class="login-button"> -->
-					<a href="Login_admin.php">Admin</a>
+					<a href="Register.php">S'incrire</a>
 				</div>
 			</form>
 		</div>

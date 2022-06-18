@@ -52,7 +52,10 @@
 				<td>$upload_date</td>
 				<td>$size</td>
 				<td>$file_type</td>
-				<td><a href='../IDriveMobile/public/uploads/$file_path'  class='imp-style' target='_blank'>$filename</a></td>
+				<td>
+					<object data='../IDriveMobile/public/uploads/$file_path' width='50' height='50'></object> </br>
+					<a href='../IDriveMobile/public/uploads/$file_path' class='imp-style' target='_blank'>$filename</a>
+				</td>
 				<td> <a href='Paste.php?id=$session_id&file=$file_path'  class='imp-style'>Copier & coller</a></td>
 			</tr>";
 		}
